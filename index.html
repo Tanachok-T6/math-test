@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Maths Test</title>
+    <title>Maths</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
@@ -38,13 +38,21 @@
 
     <!-- Google = เปิด Google -->
     <!--<a href="https://www.google.com" target="_blank" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Google</a>-->
-    <div class="w3-dropdown-hover w3-hide-small">
-      <button class="w3-padding-large w3-button" title="More">Select <i class="fa fa-caret-down"></i></button>     
-      <div class="w3-dropdown-content w3-bar-block w3-card-4">
-        <a href="#" class="w3-bar-item w3-button" onclick="showLine4()">Line 4</a>
-        <a href="#" class="w3-bar-item w3-button" onclick="showLine6()">Line 6</a>
-        <a href="#" class="w3-bar-item w3-button" onclick="showLine8()">Line 8</a>
-      </div>
+    <div class="w3-dropdown-click w3-hide-small">
+  <!-- ปุ่ม Select -->
+  <button class="w3-padding-large w3-button"
+          onclick="toggleSelect(event)">
+    Select <i class="fa fa-caret-down"></i>
+  </button>     
+  <!-- เมนูที่เด้งลง -->
+  <div id="selectMenu"class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="#" class="w3-bar-item w3-button"
+            onclick="showLine4(); closeSelect();">Line 4</a>
+        <a href="#" class="w3-bar-item w3-button"
+            onclick="showLine6(); closeSelect();">Line 6</a>
+        <a href="#" class="w3-bar-item w3-button"
+            onclick="showLine8(); closeSelect();">Line 8</a>
+        </div>
     </div>
     <a href="index.html" target="_self" class="w3-bar-item w3-button w3-padding-large w3-hide-small">เว็ปคณิตTEST</a>
   </div>
@@ -205,8 +213,6 @@
     <a href="https://www.google.com" target="_blank"
         class="w3-bar-item w3-button w3-padding-large"
         onclick="myFunction()">Google</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large"
-        onclick="myFunction()">MERCH</a>
     <a href="#" class="w3-bar-item w3-button w3-padding-large"
         onclick="showLine4(); myFunction();">Line 4</a>
     <a href="#" class="w3-bar-item w3-button w3-padding-large"
@@ -439,6 +445,22 @@ document.addEventListener("click", function (event) {
             nav.className = nav.className.replace(" w3-show", "");
         }
     }
+});
+// ---------- SELECT DROPDOWN (iPad FIX) ----------
+function toggleSelect(e) {
+    e.stopPropagation(); // กัน event ลาม
+    const menu = document.getElementById("selectMenu");
+
+    if (menu.classList.contains("w3-show")) {
+        menu.classList.remove("w3-show");
+    } else {
+        menu.classList.add("w3-show");
+    }
+}
+// คลิกที่อื่น → ปิด Select
+document.addEventListener("click", function () {
+    const menu = document.getElementById("selectMenu");
+    if (menu) menu.classList.remove("w3-show");
 });
 </script>
 </html>

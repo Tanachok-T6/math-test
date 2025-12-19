@@ -53,7 +53,7 @@
 <!-- การแสดงต่างๆในหน้าhome -->
 <div id="ShowHome" class="bgimg" style="display:none;">
     <h1 style="color:rgb(0, 0, 0); text-align:center; padding-top:calc(46px + 20px);">Welcome to Maths</h1>
-    <hr class="w3-border-grey" style="margin:auto;width:40%;">
+    <hr class="w3-border-grey" style="margin:auto;width:60%;">
     <p class="w3-large w3-center" style="color:rgb(0, 0, 0);">4 days left</p>
 </div>
 
@@ -201,13 +201,20 @@
 </div>
 
 <!-- Navbar on small screens -->
-<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
-
-  <!-- Google = Google -->
-  <a href="https://www.google.com" target="_blank" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">Google</a>
-
-  <a href="#" class="w3-bar-item w3-button w3-padding-large" onclick="myFunction()">MERCH</a>
+<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top">
+    <a href="https://www.google.com" target="_blank"
+        class="w3-bar-item w3-button w3-padding-large"
+        onclick="myFunction()">Google</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large"
+        onclick="myFunction()">MERCH</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large"
+        onclick="showLine4(); myFunction();">Line 4</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large"
+        onclick="showLine6(); myFunction();">Line 6</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large"
+        onclick="showLine8(); myFunction();">Line 8</a>
 </div>
+
 
 
 <style>
@@ -253,6 +260,7 @@ input.gamebox:focus {
 </style>
 </body>
 <script>
+/* ------------------- NAVBAR RESPONSIVE ------------------- */
 function hideAll() {
     document.getElementById("line4Area").style.display = "none";
     document.getElementById("line6Area").style.display = "none";
@@ -409,6 +417,14 @@ function updateGrid() {
     let box = document.getElementById("resultBox");
     box.style.display = "flex";
     box.textContent = sumText;
+}
+function myFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") === -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
 }
 </script>
 </html>

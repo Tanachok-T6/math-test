@@ -1,1 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Maths</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/5/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/png" href="image/logo_CRMS6.png">
+    <style>
+    body,h1 {font-family: "Raleway", sans-serif}
+    body, html {height: 100%}
+    .bgimg {
+    background-image: url('image/ForestNature.jpg');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+    }
+    </style>
+</head>
+<body>
 
+<!-- บา -->
+<div class="w3-top">
+  <div class="w3-bar w3-black w3-card">
+    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" 
+       href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu">
+       <i class="fa fa-bars"></i>
+    </a>
+
+    <!-- HOME = กลับหน้า index -->
+    <a href="index.html" onclick="showHome()" class="w3-bar-item w3-button">
+    <img src="image/logo_CRMS6.png" alt="Home" style="height:30px; vertical-align:middle;">
+    <span style="margin-left:8px; font-weight:bold;">HOME</span>
+    </a>
+
+
+    <!-- เมนู Select -->
+    <div class="w3-dropdown-click w3-hide-small">
+  <!-- ปุ่ม Select -->
+  <button class="w3-padding-large w3-button"
+          onclick="toggleSelect(event)">
+    Select <i class="fa fa-caret-down"></i>
+  </button>     
+  <!-- เมนูที่เด้งลง -->
+  <div id="selectMenu"class="w3-dropdown-content w3-bar-block w3-card-4">
+        <a href="#" class="w3-bar-item w3-button"onclick="showLine4(); closeSelect();">Line 4</a>
+        <a href="#" class="w3-bar-item w3-button"onclick="showLine6(); closeSelect();">Line 6</a>
+        <a href="#" class="w3-bar-item w3-button"onclick="showLine8(); closeSelect();">Line 8</a>
+        </div>
+    </div>
+    <a href="index.html" target="_self" class="w3-bar-item w3-button w3-padding-large w3-hide-small">เว็ปคณิตTEST</a>
+  </div>
+</div>
+
+<!-- การแสดงต่างๆในหน้าhome -->
+<div id="ShowHome" class="bgimg" style="display:none;">
+    <h1 style="color:rgb(0, 0, 0); text-align:center; padding-top:calc(46px + 20px);">Welcome to Maths</h1>
+    <hr class="w3-border-grey" style="margin:auto;width:60%;">
+    <p class="w3-large w3-center" style="color:rgb(0, 0, 0);">4 days left</p>
+</div>
+
+<!-- Grid 4 Lines (with number input & auto-calc) -->
+<div id="line4Area" style="
+    display:none;
+    background-image:url('image/forestbridge.jpg');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    min-height:100vh;
+    padding-top:calc(46px + 20px);   /* เผื่อชน navbar */
+    ">
+
+    
+    <!-- ช่องกรอกด้านบน -->
+    <div style="width:90%; max-width:320px; margin:100px auto 10px; height:40px; position:relative;">
+
+        <!-- ช่องบนช่องที่ 1 -->
+        <input id="top1" type="text" class="gamebox" style="
+            position:absolute;
+            top:0;
+            left:33%;
+            transform:translateX(-50%);
+            width:50px;
+            padding:5px;
+            text-align:center;
+        ">
+
+        <!-- ช่องบนช่องที่ 2 -->
+        <input id="top2" type="text" class="gamebox" style="
+            position:absolute;
+            top:0;
+            left:67%;
+            transform:translateX(-50%);
+            width:50px;
+            padding:5px;
+            text-align:center;
+        ">
+    </div>
+
+    <!-- กริด + ช่องด้านซ้าย -->
+    <div style="width:90%; max-width:320px; height:300px; margin:0 auto; position:relative;">
+
+        <!-- ช่องซ้ายบน -->
+        <input id="left1" type="text" class="gamebox" style="
+            position:absolute;
+            left:-60px;
+            top:28%;
+            width:50px;
+            padding:5px;
+            text-align:center;
+        ">
+
+        <!-- ช่องซ้ายล่าง -->
+        <input id="left2" type="text" class="gamebox" style="
+            position:absolute;
+            left:-60px;
+            top:61%;
+            width:50px;
+            padding:5px;
+            text-align:center;
+        ">
+
+        <!-- เส้นตั้ง -->
+        <div style="position:absolute; top:0; bottom:0; left:33.33%; width:2px; background:greenyellow"></div>
+        <div style="position:absolute; top:0; bottom:0; left:66.66%; width:2px; background:greenyellow;"></div>
+
+        <!-- เส้นนอน -->
+        <div style="position:absolute; left:0; right:0; top:33.33%; height:2px; background:greenyellow;"></div>
+        <div style="position:absolute; left:0; right:0; top:66.66%; height:2px; background:greenyellow;"></div>
+
+        <!-- ช่องผลลัพธ์ 4 ช่อง -->
+        <div id="cell1" style="position:absolute; left: 70px;; top: 66px;; width:33.33%; height:33.33%;
+            display:flex; justify-content:center; align-items:center; font-size:22px; font-weight:bold;"></div>
+
+        <div id="cell2" style="position:absolute; left: 170px;; top: 66px;; width:33.33%; height:33.33%;
+            display:flex; justify-content:center; align-items:center; font-size:22px; font-weight:bold;"></div>
+
+        <div id="cell3" style="position:absolute; left: 70px;; top: 166px;; width:33.33%; height:33.33%;
+            display:flex; justify-content:center; align-items:center; font-size:22px; font-weight:bold;"></div>
+
+        <div id="cell4" style="position:absolute; left: 170px;; top: 166px;; width:33.33%; height:33.33%;
+            display:flex; justify-content:center; align-items:center; font-size:22px; font-weight:bold;"></div>
+
+        <div id="resultBox" style="
+            position: absolute;
+            top: 350px;     /* เลื่อนลงล่าง */
+            left: 50px;    /* เลื่อนไปทางขวา */
+            width: 200px;
+            height: 50px;
+            background-color: #ff6961;
+            display:none;   /* ⭐ ซ่อนก่อน */
+            align-items:center;
+            justify-content:center;
+            border-radius: 10px;
+            font-size: 25px;
+            font-weight: bold;">
+        </div>
+    </div>
+</div>
+
+
+
+
+<!-- Grid 6 Lines -->
+<div id="line6Area" style="display:none;">
+<div style="
+    width: 300px;
+    height: 300px;
+    margin: 100px auto;
+    position: relative;
+">
+    <!-- เส้นตั้ง 3 เส้น -->
+    <div style="position:absolute; top:0; bottom:0; left:25%; width:2px; background:black;"></div>
+    <div style="position:absolute; top:0; bottom:0; left:50%; width:2px; background:black;"></div>
+    <div style="position:absolute; top:0; bottom:0; left:75%; width:2px; background:black;"></div>
+
+    <!-- เส้นนอน 3 เส้น -->
+    <div style="position:absolute; left:0; right:0; top:25%; height:2px; background:black;"></div>
+    <div style="position:absolute; left:0; right:0; top:50%; height:2px; background:black;"></div>
+    <div style="position:absolute; left:0; right:0; top:75%; height:2px; background:black;"></div>
+</div>
+</div>
+<!-- Grid 8 Lines -->
+<div id="line8Area" style="display:none;">
+<div style="
+    width: 300px;
+    height: 300px;
+    margin: 100px auto;
+    position: relative;
+">
+    <!-- เส้นตั้ง 4 เส้น -->
+    <div style="position:absolute; top:0; bottom:0; left:20%; width:2px; background:black;"></div>
+    <div style="position:absolute; top:0; bottom:0; left:40%; width:2px; background:black;"></div>
+    <div style="position:absolute; top:0; bottom:0; left:60%; width:2px; background:black;"></div>
+    <div style="position:absolute; top:0; bottom:0; left:80%; width:2px; background:black;"></div>
+
+    <!-- เส้นนอน 4 เส้น -->
+    <div style="position:absolute; left:0; right:0; top:20%; height:2px; background:black;"></div>
+    <div style="position:absolute; left:0; right:0; top:40%; height:2px; background:black;"></div>
+    <div style="position:absolute; left:0; right:0; top:60%; height:2px; background:black;"></div>
+    <div style="position:absolute; left:0; right:0; top:80%; height:2px; background:black;"></div>
+</div>
+</div>
+
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top">
+    <a href="https://www.google.com" target="_blank"
+        class="w3-bar-item w3-button w3-padding-large"
+        onclick="myFunction()">Google</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large"
+        onclick="showLine4(); myFunction();">Line 4</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large"
+        onclick="showLine6(); myFunction();">Line 6</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding-large"
+        onclick="showLine8(); myFunction();">Line 8</a>
+</div>
+
+
+
+<style>
+input.gamebox {
+    width: 70px;
+    padding: 8px 10px;
+    text-align: center;
+
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    color: #ff0000;
+    background: rgba(101, 169, 173, 0.7);
+
+    border: 2px solid #0051ff;
+    border-radius: 6px;
+
+    box-shadow: 0 0 3px #e100ff;
+    transition: 0.2s;
+}
+
+input.gamebox:focus {
+    background: rgb(0, 60, 255);
+    border-color: rgb(0, 217, 255);
+    box-shadow: 0 0 6px rgb(4, 205, 255), 0 0 14px rgb(0, 204, 255) inset;
+    outline: none;
+    transform: scale(1.05);
+}
+@media (max-width: 600px) {
+    input.gamebox {
+        width: 60px;
+        font-size: 16px;
+        padding: 6px;
+    }
+
+    #resultBox {
+        width: 90%;
+        left: 5%;
+        font-size: 20px;
+    }
+}
+</style>
+</body>
+<script>
+/* ------------------- NAVBAR RESPONSIVE ------------------- */
+function hideAll() {
+    document.getElementById("line4Area").style.display = "none";
+    document.getElementById("line6Area").style.display = "none";
+    document.getElementById("line8Area").style.display = "none";
+    document.getElementById("ShowHome").style.display = "none";
+}
+
+function showLine4() { hideAll(); document.getElementById("line4Area").style.display = "block"; }
+function showLine6() { hideAll(); document.getElementById("line6Area").style.display = "block"; }
+function showLine8() { hideAll(); document.getElementById("line8Area").style.display = "block"; }
+
+window.onload = function() {
+    const page = window.location.pathname.split("/").pop().toLowerCase();
+    if (page === "index.html" || page === "") showHome();
+};
+
+function showHome() {
+    hideAll();
+    document.getElementById("ShowHome").style.display = "block";
+}
+
+const calcInputs = ["top1", "top2", "left1", "left2"];
+calcInputs.forEach(id => {
+    document.getElementById(id).addEventListener("input", updateGrid);
+});
+
+/* ------------------- PARSE ------------------- */
+function parseTerm(str) {
+    str = str.toLowerCase().trim();
+
+    if (str === "") return { coef: 0, xpow: 0 };
+    if (str === "x") return { coef: 1, xpow: 1 };
+    if (!str.includes("x")) return { coef: Number(str), xpow: 0 };
+
+    let num = str.split("x")[0];
+    if (num === "" || num === "+") num = 1;
+    if (num === "-") num = -1;
+
+    return { coef: Number(num), xpow: 1 };
+}
+
+/* ------------------- MULTIPLY ------------------- */
+function multiplyTerm(a, b) {
+    let coef = a.coef * b.coef;
+    let pow = a.xpow + b.xpow;
+    if (coef === 0) return { coef: 0, xpow: 0 };
+    return { coef: coef, xpow: pow };
+}
+
+/* ------------------- ADD TERMS ------------------- */
+function addTerms(list) {
+    let sum = {};
+
+    list.forEach(t => {
+        let key = "x" + t.xpow;
+        if (!sum[key]) sum[key] = 0;
+        sum[key] += t.coef;
+    });
+
+    const sup = {
+        0:"⁰", 1:"¹", 2:"²", 3:"³", 4:"⁴",
+        5:"⁵", 6:"⁶", 7:"⁷", 8:"⁸", 9:"⁹"
+    };
+
+    function powToSup(n) {
+        let s = "";
+        for (let c of String(n)) s += sup[c];
+        return s;
+    }
+
+    let finalText = "";
+
+    // ⭐ เรียงจากกำลังมาก → น้อย
+    Object.keys(sum)
+        .sort((a, b) => Number(b.slice(1)) - Number(a.slice(1)))
+        .forEach(k => {
+            let pow = Number(k.slice(1));
+            let coef = sum[k];
+            if (coef === 0) return;
+
+            if (pow === 0) finalText += coef + " + ";
+            else if (pow === 1) finalText += coef + "x + ";
+            else finalText += coef + "x" + powToSup(pow) + " + ";
+        });
+
+    if (finalText.endsWith(" + "))
+        finalText = finalText.slice(0, -3);
+
+    return finalText;
+}
+/* ------------------- TERM → TEXT ------------------- */
+function termToText(t) {
+    if (t.coef === 0) return "0";
+    if (t.xpow === 0) return t.coef;
+
+    // ตารางยกกำลังเป็นตัวบน
+    const sup = {
+        0:"⁰", 1:"¹", 2:"²", 3:"³", 4:"⁴",
+        5:"⁵", 6:"⁶", 7:"⁷", 8:"⁸", 9:"⁹"
+    };
+
+    if (t.xpow === 1) return t.coef + "x";
+
+    // ถ้ามากกว่า 9 จะใช้หลายตัวรวมกัน เช่น 12 → ¹²
+    let powStr = "";
+    for (let c of String(t.xpow)) {
+        powStr += sup[c];
+    }
+
+    return t.coef + "x" + powStr;
+}
+
+/* ------------------- CHECK INPUT FILLED ------------------- */
+function checkInputsFilled() {
+    let t1 = document.getElementById("top1").value.trim();
+    let t2 = document.getElementById("top2").value.trim();
+    let l1 = document.getElementById("left1").value.trim();
+    let l2 = document.getElementById("left2").value.trim();
+
+    return !(t1 === "" || t2 === "" || l1 === "" || l2 === "");
+}
+
+/* ------------------- UPDATE GRID ------------------- */
+function updateGrid() {
+
+    // ถ้ายังไม่ครบ → ล้างช่อง + ซ่อนผลลัพธ์
+    if (!checkInputsFilled()) {
+        document.getElementById("cell1").innerHTML = "";
+        document.getElementById("cell2").innerHTML = "";
+        document.getElementById("cell3").innerHTML = "";
+        document.getElementById("cell4").innerHTML = "";
+        document.getElementById("resultBox").style.display = "none";
+        return;
+    }
+
+    let top1 = parseTerm(document.getElementById("top1").value);
+    let top2 = parseTerm(document.getElementById("top2").value);
+    let left1 = parseTerm(document.getElementById("left1").value);
+    let left2 = parseTerm(document.getElementById("left2").value);
+
+    let c1 = multiplyTerm(top1, left1);
+    let c2 = multiplyTerm(top2, left1);
+    let c3 = multiplyTerm(top1, left2);
+    let c4 = multiplyTerm(top2, left2);
+
+    document.getElementById("cell1").innerHTML = termToText(c1);
+    document.getElementById("cell2").innerHTML = termToText(c2);
+    document.getElementById("cell3").innerHTML = termToText(c3);
+    document.getElementById("cell4").innerHTML = termToText(c4);
+
+    let sumText = addTerms([c1, c2, c3, c4]);
+
+    // แสดงผลลัพธ์ด้านล่าง
+    let box = document.getElementById("resultBox");
+    box.style.display = "flex";
+    box.textContent = sumText;
+}
+function myFunction() {
+    var x = document.getElementById("navDemo");
+    if (x.className.indexOf("w3-show") === -1) {
+        x.className += " w3-show";
+    } else {
+        x.className = x.className.replace(" w3-show", "");
+    }
+}
+// ⭐ คลิกที่อื่นนอกจาก navbar → ให้เมนูหุบ
+document.addEventListener("click", function (event) {
+    const nav = document.getElementById("navDemo");
+    const menuBtn = document.querySelector(".fa-bars");
+
+    // ถ้าเมนูเปิดอยู่
+    if (nav.className.indexOf("w3-show") !== -1) {
+
+        // ถ้าคลิก НЕ อยู่ในเมนู และ НЕ ใช่ปุ่ม ☰
+        if (!nav.contains(event.target) && !menuBtn.contains(event.target)) {
+            nav.className = nav.className.replace(" w3-show", "");
+        }
+    }
+});
+// ---------- SELECT DROPDOWN (iPad FIX) ----------
+function toggleSelect(e) {
+    e.stopPropagation(); // กัน event ลาม
+    const menu = document.getElementById("selectMenu");
+
+    if (menu.classList.contains("w3-show")) {
+        menu.classList.remove("w3-show");
+    } else {
+        menu.classList.add("w3-show");
+    }
+}
+// คลิกที่อื่น → ปิด Select
+document.addEventListener("click", function () {
+    const menu = document.getElementById("selectMenu");
+    if (menu) menu.classList.remove("w3-show");
+});
+function closeSelect() {
+    const menu = document.getElementById("selectMenu");
+    if (menu) menu.classList.remove("w3-show");
+}
+</script>
+</html>

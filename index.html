@@ -39,12 +39,9 @@
     <!-- เมนู Select -->
     <div class="w3-dropdown-click w3-hide-small">
   <!-- ปุ่ม Select -->
-  <button class="w3-padding-large w3-button"
-          onclick="toggleSelect(event)">
-    Select <i class="fa fa-caret-down"></i>
-  </button>     
+  <button class="w3-padding-large w3-button"onclick="toggleSelect(event)">Select <i class="fa fa-caret-down"></i></button>     
   <!-- เมนูที่เด้งลง -->
-  <div id="selectMenu"class="w3-dropdown-content w3-bar-block w3-card-4">
+  <div id="selectMenu"class="w3-dropdown-content w3-bar-block w3-card-4"onclick="event.stopPropagation()">
         <a href="#" class="w3-bar-item w3-button"onclick="showLine4(); closeSelect();">Line 4</a>
         <a href="#" class="w3-bar-item w3-button"onclick="showLine6(); closeSelect();">Line 6</a>
         <a href="#" class="w3-bar-item w3-button"onclick="showLine8(); closeSelect();">Line 8</a>
@@ -461,6 +458,10 @@ document.addEventListener("click", function () {
 function closeSelect() {
     const menu = document.getElementById("selectMenu");
     if (menu) menu.classList.remove("w3-show");
+
+    // ⭐ บังคับให้ปุ่ม Select หลุด focus (แก้ iPad)
+    document.activeElement.blur();
 }
+
 </script>
 </html>

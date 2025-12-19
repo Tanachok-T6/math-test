@@ -426,5 +426,19 @@ function myFunction() {
         x.className = x.className.replace(" w3-show", "");
     }
 }
+// ⭐ คลิกที่อื่นนอกจาก navbar → ให้เมนูหุบ
+document.addEventListener("click", function (event) {
+    const nav = document.getElementById("navDemo");
+    const menuBtn = document.querySelector(".fa-bars");
+
+    // ถ้าเมนูเปิดอยู่
+    if (nav.className.indexOf("w3-show") !== -1) {
+
+        // ถ้าคลิก НЕ อยู่ในเมนู และ НЕ ใช่ปุ่ม ☰
+        if (!nav.contains(event.target) && !menuBtn.contains(event.target)) {
+            nav.className = nav.className.replace(" w3-show", "");
+        }
+    }
+});
 </script>
 </html>

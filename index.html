@@ -60,14 +60,14 @@
 <div id="ShowHome" class="bgimg" style="display:none;">
     <h1 style="color:rgb(0, 0, 0); text-align:center; padding-top:calc(46px + 20px);">Welcome to Maths</h1>
     <hr class="w3-border-grey" style="margin:auto;width:60%;">
-    <p class="w3-large w3-center" style="color:rgb(0, 0, 0);">by Studio Maths</p>
+    <p class="w3-large w3-center" style="color:rgb(0, 0, 0);">by Studio</p>
 </div>
 
 <!-- Grid 4 Lines (with number input & auto-calc) -->
 <div id="line4Area" style="
     display:none;
     background-image:url('image/forestbridge.jpg');
-    background-size:cover;
+    background-size: cover;
     background-position:center;
     background-repeat:no-repeat;
     min-height:100vh;
@@ -79,7 +79,7 @@
     <div style="width:90%; max-width:320px; margin:100px auto 10px; height:40px; position:relative;">
 
         <!-- ช่องบนช่องที่ 1 -->
-        <input id="top1" type="text" class="gamebox" style="
+        <input id="top1" type="text" class="gamebox" oninput="resizeInput(this)" style="
             position:absolute;
             top:0;
             left:33%;
@@ -90,7 +90,7 @@
         ">
 
         <!-- ช่องบนช่องที่ 2 -->
-        <input id="top2" type="text" class="gamebox" style="
+        <input id="top2" type="text" class="gamebox" oninput="resizeInput(this)" style="
             position:absolute;
             top:0;
             left:67%;
@@ -105,7 +105,7 @@
     <div style="width:90%; max-width:320px; height:300px; margin:0 auto; position:relative;">
 
         <!-- ช่องซ้ายบน -->
-        <input id="left1" type="text" class="gamebox" style="
+        <input id="left1" type="text" class="gamebox" oninput="resizeInput(this)" style="
             position:absolute;
             left:-60px;
             top:28%;
@@ -115,7 +115,7 @@
         ">
 
         <!-- ช่องซ้ายล่าง -->
-        <input id="left2" type="text" class="gamebox" style="
+        <input id="left2" type="text" class="gamebox" oninput="resizeInput(this)" style="
             position:absolute;
             left:-60px;
             top:61%;
@@ -608,9 +608,17 @@ function autoResizeText(box, maxSize = 25, minSize = 15) {
         box.style.fontSize = size + "px";
     }
 }
+function resizeInput(input) {
+    let maxSize = 20;
+    let minSize = 15;
+    let size = maxSize;
 
+    input.style.fontSize = size + "px";
+
+    while (input.scrollWidth > input.clientWidth && size > minSize) {
+        size--;
+        input.style.fontSize = size + "px";
+    }
+}
 </script>
 </html>
-
-
-

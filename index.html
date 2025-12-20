@@ -165,25 +165,146 @@
 
 
 
-<!-- Grid 6 Lines -->
-<div id="line6Area" style="display:none;">
-<div style="
-    width: 300px;
-    height: 300px;
-    margin: 100px auto;
-    position: relative;
-">
-    <!-- เส้นตั้ง 3 เส้น -->
-    <div style="position:absolute; top:0; bottom:0; left:25%; width:2px; background:black;"></div>
-    <div style="position:absolute; top:0; bottom:0; left:50%; width:2px; background:black;"></div>
-    <div style="position:absolute; top:0; bottom:0; left:75%; width:2px; background:black;"></div>
+<!-- ================= LINE 6 (3x3) ================= -->
+<div id="line6Area" style="
+    display:none;
+    background-image:url('image/forestbridge.jpg');
+    background-size: cover;
+    background-position:center;
+    background-repeat:no-repeat;
+    min-height:100vh;
+    padding-top:calc(86px + 20px);   /* เผื่อชน navbar */
+    ">
 
-    <!-- เส้นนอน 3 เส้น -->
-    <div style="position:absolute; left:0; right:0; top:25%; height:2px; background:black;"></div>
-    <div style="position:absolute; left:0; right:0; top:50%; height:2px; background:black;"></div>
-    <div style="position:absolute; left:0; right:0; top:75%; height:2px; background:black;"></div>
+    <!-- ช่องกรอกด้านบน -->
+    <div style="width:90%; max-width:320px; margin:100px auto 10px; height:40px; position:relative;">
+
+        <!-- ช่องบนซ้าย -->
+        <input id="top1_3" type="text" class="gamebox" oninput="resizeInput(this)" style="
+            position:absolute;
+            top:0;
+            left:25%;
+            transform:translateX(-50%);
+            width:50px;
+            padding:5px;
+            text-align:center;
+        ">
+
+        <!-- ช่องบนกลาง -->
+        <input id="top2_3" type="text" class="gamebox" oninput="resizeInput(this)" style="
+            position:absolute;
+            top:0;
+            left:50%;
+            transform:translateX(-50%);
+            width:50px;
+            padding:5px;
+            text-align:center;
+        ">
+
+        <!-- ช่องบนขวา -->
+        <input id="top3_3" type="text" class="gamebox" oninput="resizeInput(this)" style="
+            position:absolute;
+            top:0;
+            left:75%;
+            transform:translateX(-50%);
+            width:50px;
+            padding:5px;
+            text-align:center;
+        ">
+    </div>
+
+    <!-- กริด + ช่องด้านซ้าย -->
+    <div style="width:90%; max-width:320px; height:300px; margin:0 auto; position:relative;">
+
+        <!-- ช่องซ้ายบน -->
+        <input id="left1_3" type="text" class="gamebox" oninput="resizeInput(this)" style="
+            position:absolute;
+            left:-60px;
+            top:18%;
+            width:50px;
+            padding:5px;
+            text-align:center;
+        ">
+
+        <!-- ช่องซ้ายกลาง -->
+        <input id="left2_3" type="text" class="gamebox" oninput="resizeInput(this)" style="
+            position:absolute;
+            left:-60px;
+            top:43%;
+            width:50px;
+            padding:5px;
+            text-align:center;
+        ">
+
+        <!-- ช่องซ้ายล่าง -->
+        <input id="left3_3" type="text" class="gamebox" oninput="resizeInput(this)" style="
+            position:absolute;
+            left:-60px;
+            top:68%;
+            width:50px;
+            padding:5px;
+            text-align:center;
+        ">
+
+        <!-- เส้นตั้ง 3 เส้น -->
+        <div style="position:absolute;top:0;bottom:0;left:25%;width:2px;background:greenyellow"></div>
+        <div style="position:absolute;top:0;bottom:0;left:50%;width:2px;background:greenyellow"></div>
+        <div style="position:absolute;top:0;bottom:0;left:75%;width:2px;background:greenyellow"></div>
+
+        <!-- เส้นนอน 3 เส้น -->
+        <div style="position:absolute;left:0;right:0;top:25%;height:2px;background:greenyellow"></div>
+        <div style="position:absolute;left:0;right:0;top:50%;height:2px;background:greenyellow"></div>
+        <div style="position:absolute;left:0;right:0;top:75%;height:2px;background:greenyellow"></div>
+
+        <!-- แถวที่ 1 -->
+        <div id="cell3_1" style="position:absolute; left:18%; top:15%; width:33.33%; height:33.33%;
+        display:flex; justify-content:center; align-items:center;font-size:22px; font-weight:bold; color:#ff0000;"></div>
+
+        <div id="cell3_2" style="position:absolute; left:43%; top:15%; width:33.33%; height:33.33%;
+        display:flex; justify-content:center; align-items:center;font-size:22px; font-weight:bold; color:#ff0000;"></div>
+
+        <div id="cell3_3" style="position:absolute; left:70%; top:15%; width:33.33%; height:33.33%;
+        display:flex; justify-content:center; align-items:center;font-size:22px; font-weight:bold; color:#ff0000;"></div>
+
+        <!-- แถวที่ 2 -->
+        <div id="cell3_4" style="position:absolute; left:18%; top:40%; width:33.33%; height:33.33%;
+        display:flex; justify-content:center; align-items:center;font-size:22px; font-weight:bold; color:#ff0000;"></div>
+
+        <div id="cell3_5" style="position:absolute; left:43%; top:40%; width:33.33%; height:33.33%;
+        display:flex; justify-content:center; align-items:center;font-size:22px; font-weight:bold; color:#ff0000;"></div>
+
+        <div id="cell3_6" style="position:absolute; left:70%; top:40%; width:33.33%; height:33.33%;
+        display:flex; justify-content:center; align-items:center;font-size:22px; font-weight:bold; color:#ff0000;"></div>
+
+        <!-- แถวที่ 3 -->
+        <div id="cell3_7" style="position:absolute; left:18%; top:66.66%; width:33.33%; height:33.33%;
+        display:flex; justify-content:center; align-items:center;font-size:22px; font-weight:bold; color:#ff0000;"></div>
+
+        <div id="cell3_8" style="position:absolute; left:43%; top:66.66%; width:33.33%; height:33.33%;
+        display:flex; justify-content:center; align-items:center;font-size:22px; font-weight:bold; color:#ff0000;"></div>
+
+        <div id="cell3_9" style="position:absolute; left:70%; top:66.66%; width:33.33%; height:33.33%;
+        display:flex; justify-content:center; align-items:center;font-size:22px; font-weight:bold; color:#ff0000;"></div>
+
+        <div id="resultBox3" style="
+            position:absolute;
+            top:380px;
+            left:50%;
+            transform:translateX(-50%);
+            width:220px;
+            height:30px;
+            background-color:#ff6961;
+            display:none;
+            align-items:center;
+            justify-content:center;
+            border-radius:10px;
+            font-size:24px;
+            font-weight:bold;">
+        </div>
+
+    </div>
 </div>
-</div>
+
 <!-- Grid 8 Lines -->
 <div id="line8Area" style="display:none;">
 <div style="
@@ -277,7 +398,12 @@ function showLine4() {
     document.getElementById("line4Area").style.display = "block";
 }
 
-function showLine6() { hideAll(); document.getElementById("line6Area").style.display = "block"; }
+function showLine6() {
+    hideAll();
+    clearLine6();
+    document.getElementById("line6Area").style.display = "block";
+}
+
 
 function showLine8() { hideAll(); document.getElementById("line8Area").style.display = "block"; }
 
@@ -295,6 +421,14 @@ const calcInputs = ["top1", "top2", "left1", "left2"];
 calcInputs.forEach(id => {
     document.getElementById(id).addEventListener("input", updateGrid);
 });
+
+[
+ "top1_3","top2_3","top3_3",
+ "left1_3","left2_3","left3_3"
+].forEach(id => {
+    document.getElementById(id).addEventListener("input", updateGrid3);
+});
+
 
 /* ------------------- PARSE ------------------- */
 function parseTerm(str) {
@@ -417,21 +551,6 @@ function formatExponent(text) {
         return "x" + pow;
     });
 }
-/* ------------------- CALCULATE LINE 4 ------------------- */
-function calculateLine4() {
-    const top1 = document.getElementById("top1").value;
-    const top2 = document.getElementById("top2").value;
-    const left1 = document.getElementById("left1").value;
-    const left2 = document.getElementById("left2").value;
-
-    document.getElementById("cell1").innerHTML = formatExponent(top1);
-    document.getElementById("cell2").innerHTML = formatExponent(top2);
-    document.getElementById("cell3").innerHTML = formatExponent(left1);
-    document.getElementById("cell4").innerHTML = formatExponent(left2);
-
-    document.getElementById("resultBox").style.display = "block";
-}
-
 /* ------------------- CHECK INPUT FILLED ------------------- */
 function checkInputsFilled() {
     let t1 = document.getElementById("top1").value.trim();
@@ -440,6 +559,15 @@ function checkInputsFilled() {
     let l2 = document.getElementById("left2").value.trim();
 
     return !(t1 === "" || t2 === "" || l1 === "" || l2 === "");
+}
+function checkInputsFilled3() {
+    const ids = [
+        "top1_3","top2_3","top3_3",
+        "left1_3","left2_3","left3_3"
+    ];
+    return ids.every(id =>
+        document.getElementById(id).value.trim() !== ""
+    );
 }
 
 /* ------------------- UPDATE GRID ------------------- */
@@ -481,41 +609,46 @@ function updateGrid() {
     autoResizeText(box);
 
 }
-/*function updateGrid() {
+function updateGrid3() {
 
-    if (!checkInputsFilled()) {
-        document.getElementById("cell1").innerHTML = "";
-        document.getElementById("cell2").innerHTML = "";
-        document.getElementById("cell3").innerHTML = "";
-        document.getElementById("cell4").innerHTML = "";
-        document.getElementById("resultBox").style.display = "none";
+    if (!checkInputsFilled3()) {
+        for (let i = 1; i <= 9; i++) {
+            document.getElementById("cell3_" + i).innerHTML = "";
+        }
+        document.getElementById("resultBox3").style.display = "none";
         return;
     }
 
-    let top1 = parseTerm(document.getElementById("top1").value);
-    let top2 = parseTerm(document.getElementById("top2").value);
-    let left1 = parseTerm(document.getElementById("left1").value);
-    let left2 = parseTerm(document.getElementById("left2").value);
+    const tops = [
+        parseTerm(top1_3.value),
+        parseTerm(top2_3.value),
+        parseTerm(top3_3.value)
+    ];
 
-    let c1 = multiplyTerm(top1, left1);
-    let c2 = multiplyTerm(top2, left1);
-    let c3 = multiplyTerm(top1, left2);
-    let c4 = multiplyTerm(top2, left2);
+    const lefts = [
+        parseTerm(left1_3.value),
+        parseTerm(left2_3.value),
+        parseTerm(left3_3.value)
+    ];
 
-    document.getElementById("cell1").innerHTML = termToText(c1);
-    document.getElementById("cell2").innerHTML = termToText(c2);
-    document.getElementById("cell3").innerHTML = termToText(c3);
-    document.getElementById("cell4").innerHTML = termToText(c4);
+    let results = [];
+    let index = 1;
 
-    let sumText = addTerms([c1, c2, c3, c4]);
+    for (let r = 0; r < 3; r++) {
+        for (let c = 0; c < 3; c++) {
+            let t = multiplyTerm(tops[c], lefts[r]);
+            results.push(t);
+            document.getElementById("cell3_" + index).innerHTML = termToText(t);
+            index++;
+        }
+    }
 
-    let box = document.getElementById("resultBox");
+    const box = document.getElementById("resultBox3");
+    box.innerHTML = formatExponent(addTerms(results));
     box.style.display = "flex";
-    box.textContent = formatExponent(sumText);
-    autoFitText(box);
+    autoResizeText(box);
+}
 
-    calculateLine4();
-}*/
 
 function myFunction() {
     var x = document.getElementById("navDemo");
@@ -565,6 +698,7 @@ function closeSelect() {
     // ⭐ บังคับให้ปุ่ม Select หลุด focus (ตัวแก้หลัก)
     if (btn) btn.blur();
 }
+
 function clearLine4() {
     const ids = ["top1", "top2", "left1", "left2"];
     ids.forEach(id => {
@@ -579,6 +713,27 @@ function clearLine4() {
     document.getElementById("cell4").innerHTML = "";
     document.getElementById("resultBox").style.display = "none";
 }
+
+function clearLine6() {
+
+    const ids = [
+        "top1_3","top2_3","top3_3",
+        "left1_3","left2_3","left3_3"
+    ];
+
+    ids.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = "";
+    });
+
+    for (let i = 1; i <= 9; i++) {
+        document.getElementById("cell3_" + i).innerHTML = "";
+    }
+
+    document.getElementById("resultBox3").style.display = "none";
+}
+
+
 function handleSelect(sel) {
 
     // 🔹 เปลี่ยนหน้า / line

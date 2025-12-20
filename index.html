@@ -146,18 +146,28 @@
             display:flex; justify-content:center; align-items:center; font-size:22px; font-weight:bold; color: #ff0000;"></div>
 
         <div id="resultBox" style="
-            position: absolute;
-            top: 350px;     /* เลื่อนลงล่าง */
-            left: 50px;    /* เลื่อนไปทางขวา */
-            width: 200px;
-            height: 25px;
-            background-color: #ff6961;
-            display:none;   /* ⭐ ซ่อนก่อน */
+            position:absolute;
+            top:350px;
+            left:50%;
+            transform:translateX(-50%);
+
+            min-width:200px;
+            max-width:90%;
+            width:fit-content;
+
+            padding:6px 14px;
+            height:auto;
+
+            background-color:#ff6961;
+            display:none;
             align-items:center;
             justify-content:center;
-            border-radius: 10px;
-            font-size: 25px;
-            font-weight: bold;">
+            border-radius:10px;
+
+            font-size:25px;
+            font-weight:bold;
+            white-space:nowrap;
+            ">
         </div>
     </div>
 </div>
@@ -291,17 +301,25 @@
             top:380px;
             left:50%;
             transform:translateX(-50%);
-            width:220px;
-            height:30px;
+
+            min-width:220px;
+            max-width:90%;
+            width:fit-content;
+
+            padding:6px 16px;
+            height:auto;
+
             background-color:#ff6961;
             display:none;
             align-items:center;
             justify-content:center;
             border-radius:10px;
-            font-size:24px;
-            font-weight:bold;">
-        </div>
 
+            font-size:24px;
+            font-weight:bold;
+            white-space:nowrap;
+            ">
+        </div>
     </div>
 </div>
 

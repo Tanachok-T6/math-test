@@ -1080,31 +1080,5 @@ function resizeInput(input) {
         input.style.fontSize = size + "px";
     }
 }
-function clearAllGrids() {
-
-    // ----- 2x2 -----
-    for (let i = 1; i <= 4; i++) {
-        const c = document.getElementById("cell" + i);
-        if (c) c.innerHTML = "";
-    }
-    const r2 = document.getElementById("resultBox");
-    if (r2) r2.style.display = "none";
-
-    // ----- 3x3 -----
-    for (let i = 1; i <= 9; i++) {
-        const c = document.getElementById("cell3_" + i);
-        if (c) c.innerHTML = "";
-    }
-    const r3 = document.getElementById("resultBox3");
-    if (r3) r3.style.display = "none";
-
-    // ----- 4x4 -----
-    for (let i = 1; i <= 16; i++) {
-        const c = document.getElementById("cell4_" + i);
-        if (c) c.innerHTML = "";
-    }
-    const r4 = document.getElementById("resultBox4");
-    if (r4) r4.style.display = "none";
-}
 </script>
 </html>

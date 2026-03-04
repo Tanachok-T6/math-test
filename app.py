@@ -110,5 +110,5 @@ with st.sidebar:
         st.image("IMAGE/logo_CRMS6.png", width='stretch') # แก้ตรงนี้เพื่อลบคำเตือนสีส้ม
 
 import time
-time.sleep(1)
+time.sleep(10)
 st.rerun()

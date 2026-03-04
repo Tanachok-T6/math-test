@@ -1,15 +1,3 @@
-git init
-git add .
-git commit -m "First commit"
-git branch -M main
-git remote add origin https://github.com/ชื่อผู้ใช้ของคุณ/ชื่อRepository.git
-git push -u origin main
+& "$env:LOCALAPPDATA\Programs\Python\Python314\python.exe" -m streamlit run app.py คือรัน
 
-git --version
-
-git remote remove origin
-git remote add origin https://github.com/Tanachok-T6/math-test.git
-git push -u origin main
-
-
-git pull origin main
+& "C:\Users\Tanachok\AppData\Local\Programs\Python\Python314\python.exe" -m streamlit run app.py ถ้าขึ้นหาไม่เจอเอาอันนี้

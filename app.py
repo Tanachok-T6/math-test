@@ -99,10 +99,11 @@ components.html(html_code, height=950)
 
 
 import datetime
-import pytz # เพิ่ม library นี้
+import pytz
 
-# กำหนด Timezone ไทย
+# โค้ดสำหรับแสดงเวลาไทยบนหน้าจอ
 bangkok = pytz.timezone('Asia/Bangkok')
-now_bangkok = datetime.datetime.now(bangkok)
+time_str = datetime.datetime.now(bangkok).strftime('%d/%m/%Y %H:%M:%S')
 
-print(now_bangkok.strftime('%Y-%m-%d %H:%M:%S'))
+# แสดงเวลาบนหน้าเว็บ (เอาไปวางไว้ใต้ชื่อโรงเรียนหรือที่ชอบได้เลย)
+st.markdown(f"<p style='text-align: center; color: gray;'>เวลาปัจจุบัน: {time_str}</p>", unsafe_allow_html=True)

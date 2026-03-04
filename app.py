@@ -95,4 +95,20 @@ html_code = f"""
 </body>
 </html>
 """
+
 components.html(html_code, height=950)
+
+import streamlit as st
+import streamlit.components.v1 as components
+import datetime
+import pytz
+
+# ตรงส่วน Logo (ใน sidebar) ให้เปลี่ยนจาก use_container_width=True เป็น width='stretch'
+with st.sidebar:
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.image("IMAGE/logo_CRMS6.png", width='stretch') # แก้ตรงนี้เพื่อลบคำเตือนสีส้ม
+
+import time
+time.sleep(1)
+st.rerun()

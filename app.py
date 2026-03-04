@@ -17,7 +17,7 @@ st.markdown("""
     .school-title { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 999999; font-size: 26px; font-weight: 800; pointer-events: none; }
 </style>
 <div class="school-title">🏫 โรงเรียนเทศบาล 6 นครเชียงราย</div>
-""", unsafe_allow_html=True)
+""", width='stretch')
 
 with st.sidebar:
     col1, col2, col3 = st.columns([1, 2, 1])
@@ -105,12 +105,5 @@ bangkok_now = datetime.datetime.now(ZoneInfo("Asia/Bangkok"))
 time_str = bangkok_now.strftime('%d/%m/%Y %H:%M:%S')
 st.markdown(f"<p style='text-align: center; color: gray;'>เวลาปัจจุบัน: {time_str}</p>", unsafe_allow_html=True)
 
-# ตรงส่วน Logo (ใน sidebar) ให้เปลี่ยนจาก use_container_width=True เป็น width='stretch'
-with st.sidebar:
-    col1, col2, col3 = st.columns([1, 2, 1])
-    with col2:
-        st.image("IMAGE/logo_CRMS6.png", width='stretch') # แก้ตรงนี้เพื่อลบคำเตือนสีส้ม
-
-
-time.sleep(10)
+time.sleep(1000)
 st.rerun()

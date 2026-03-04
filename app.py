@@ -103,7 +103,6 @@ components.html(html_code, height=950)
 
 bangkok_now = datetime.datetime.now(ZoneInfo("Asia/Bangkok"))
 time_str = bangkok_now.strftime('%d/%m/%Y %H:%M:%S')
-st.markdown(f"<p style='text-align: center; color: gray;'>เวลาปัจจุบัน: {time_str}</p>", unsafe_allow_html=True)
 
 # ตรงส่วน Logo (ใน sidebar) ให้เปลี่ยนจาก use_container_width=True เป็น width='stretch'
 with st.sidebar:

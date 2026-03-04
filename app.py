@@ -96,3 +96,13 @@ html_code = f"""
 </html>
 """
 components.html(html_code, height=950)
+
+
+import datetime
+import pytz # เพิ่ม library นี้
+
+# กำหนด Timezone ไทย
+bangkok = pytz.timezone('Asia/Bangkok')
+now_bangkok = datetime.datetime.now(bangkok)
+
+print(now_bangkok.strftime('%Y-%m-%d %H:%M:%S'))

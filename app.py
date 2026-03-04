@@ -4,7 +4,7 @@ import streamlit.components.v1 as components
 # ==========================================
 # 1. การตั้งค่าหน้าจอ
 # ==========================================
-st.set_page_config(page_title="Maths Studio Pro", page_icon="🔢", layout="wide")
+st.set_page_config(page_title="Maths Studio", page_icon="🔢", layout="wide")
 
 st.markdown("""
 <style>
@@ -95,8 +95,8 @@ html_code = f"""
 </body>
 </html>
 """
-
 components.html(html_code, height=950)
+
 
 import streamlit as st
 import streamlit.components.v1 as components

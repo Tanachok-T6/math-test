@@ -14,7 +14,10 @@ st.set_page_config(page_title="Maths Studio", page_icon="🔢", layout="wide")
 st.markdown("""
 <style>
     .stApp, .stApp > header { background-color: #f8f9fa !important; }
-    [data-testid="stSidebar"] { background-color: #ffffff !important; border-right: 1px solid #e0e0e0; }[data-testid="stSidebar"] * { color: #000000 !important; }
+    [data-testid="stSidebar"] { background-color: #ffffff !important; border-right: 1px solid #e0e0e0; }
+    [data-testid="stSidebar"] * { color: #000000 !important; }
+    
+    /* แก้ไขตรงนี้: ใช้ --text-color ของระบบเพื่อเปลี่ยนสีตามธีม */
     .school-title { 
         position: fixed; 
         top: 14px; 
@@ -23,7 +26,7 @@ st.markdown("""
         z-index: 999999; 
         font-size: 26px; 
         font-weight: 800; 
-        color: #000000 !important;
+        color: var(--text-color) !important; 
         pointer-events: none; 
     }
 </style>

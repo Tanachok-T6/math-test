@@ -1,5 +1,8 @@
 import streamlit as st
 import streamlit.components.v1 as components
+import datetime
+from zoneinfo import ZoneInfo  # ใช้ตัวนี้แทน pytz ชัวร์กว่า 100%
+import time
 
 # ==========================================
 # 1. การตั้งค่าหน้าจอ
@@ -98,10 +101,12 @@ html_code = f"""
 components.html(html_code, height=950)
 
 
-import streamlit as st
-import streamlit.components.v1 as components
-import datetime
-import pytz
+# ดึงเวลาประเทศไทย (Asia/Bangkok)
+bangkok_time = datetime.datetime.now(ZoneInfo("Asia/Bangkok"))
+time_str = bangkok_time.strftime('%d/%m/%Y %H:%M:%S')
+
+st.markdown("<h1 style='text-align: center;'>🏫 โรงเรียนเทศบาล 6 นครเชียงราย</h1>", unsafe_allow_html=True)
+st.markdown(f"<p style='text-align: center; color: gray;'>เวลาปัจจุบัน: {time_str}</p>", unsafe_allow_html=True)
 
 # ตรงส่วน Logo (ใน sidebar) ให้เปลี่ยนจาก use_container_width=True เป็น width='stretch'
 with st.sidebar:
@@ -109,6 +114,6 @@ with st.sidebar:
     with col2:
         st.image("IMAGE/logo_CRMS6.png", width='stretch') # แก้ตรงนี้เพื่อลบคำเตือนสีส้ม
 
-import time
+
 time.sleep(1)
 st.rerun()

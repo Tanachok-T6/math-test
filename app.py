@@ -98,12 +98,13 @@ html_code = f"""
 components.html(html_code, height=950)
 
 
+import streamlit as st
+import streamlit.components.v1 as components
 import datetime
 import pytz
 
-# โค้ดสำหรับแสดงเวลาไทยบนหน้าจอ
-bangkok = pytz.timezone('Asia/Bangkok')
-time_str = datetime.datetime.now(bangkok).strftime('%d/%m/%Y %H:%M:%S')
-
-# แสดงเวลาบนหน้าเว็บ (เอาไปวางไว้ใต้ชื่อโรงเรียนหรือที่ชอบได้เลย)
-st.markdown(f"<p style='text-align: center; color: gray;'>เวลาปัจจุบัน: {time_str}</p>", unsafe_allow_html=True)
+# ตรงส่วน Logo (ใน sidebar) ให้เปลี่ยนจาก use_container_width=True เป็น width='stretch'
+with st.sidebar:
+    col1, col2, col3 = st.columns([1, 2, 1])
+    with col2:
+        st.image("IMAGE/logo_CRMS6.png", width='stretch') # แก้ตรงนี้เพื่อลบคำเตือนสีส้ม

@@ -14,7 +14,7 @@ st.markdown("""
     .school-title { position: fixed; top: 14px; left: 50%; transform: translateX(-50%); z-index: 999999; font-size: 26px; font-weight: 800; pointer-events: none; }
 </style>
 <div class="school-title">🏫 โรงเรียนเทศบาล 6 นครเชียงราย</div>
-""", use_container_width=True)
+""", unsafe_allow_html=True)
 
 with st.sidebar:
     col1, col2, col3 = st.columns([1, 2, 1])

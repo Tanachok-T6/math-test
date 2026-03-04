@@ -10,3 +10,6 @@ git --version
 git remote remove origin
 git remote add origin https://github.com/Tanachok-T6/math-test.git
 git push -u origin main
+
+
+git pull origin main

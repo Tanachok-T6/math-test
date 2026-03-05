@@ -31,7 +31,7 @@ st.markdown("""
     }
 </style>
 <div class="school-title">🏫 โรงเรียนเทศบาล 6 นครเชียงราย</div>
-""", use_container_width=True, width='stretch')
+""", use_container_width=True)
 
 # ==========================================
 # 2. แถบเครื่องมือด้านข้าง (Sidebar)

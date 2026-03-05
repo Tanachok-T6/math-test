@@ -3,7 +3,24 @@ import streamlit.components.v1 as components
 import datetime
 from zoneinfo import ZoneInfo
 import time
+import threading
 
+def log_heartbeat():
+    while True:
+        # ดึงเวลาปัจจุบันมาแสดงใน Log
+        now = datetime.datetime.now(ZoneInfo("Asia/Bangkok")).strftime('%H:%M:%S')
+        # พิมพ์ข้อความลงใน Log (คุณสามารถเปลี่ยนข้อความในวงเล็บได้ตามต้องการ)
+        print(f"[{now}] 🟢 ระบบทำงานปกติ: ผู้ใช้กำลังใช้งาน Maths Studio")
+        time.sleep(5) # รอ 5 วินาทีแล้ววนลูปใหม่
+
+# ตรวจสอบว่าเคยสั่งรันการทำงานเบื้องหลังไปหรือยัง (เพื่อไม่ให้มันรันซ้ำซ้อนกัน)
+if 'logger_running' not in st.session_state:
+    # สั่งให้ฟังก์ชัน log_heartbeat ทำงานอยู่เบื้องหลัง
+    t = threading.Thread(target=log_heartbeat, daemon=True)
+    t.start()
+    st.session_state.logger_running = True
+
+st.set_page_config(page_title="Maths Studio", page_icon="🔢", layout="wide")
 # ==========================================
 # 1. การตั้งค่าหน้าจอ
 # ==========================================

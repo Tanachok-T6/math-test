@@ -203,4 +203,4 @@ bangkok_now = datetime.datetime.now(ZoneInfo("Asia/Bangkok"))
 time_str = bangkok_now.strftime('%d/%m/%Y %H:%M:%S')
 
 # แสดงเวลาในพื้นที่ที่กำหนด
-time_placeholder.markdown(f"<p style='text-align: center; color: gray;'>เวลาปัจจุบัน: {time_str}</p>", unsafe_allow_html=True)
+time_placeholder.markdown(f"<p style='text-align: center; color: gray;'>เข้าเมื่อ: {time_str}</p>", unsafe_allow_html=True)

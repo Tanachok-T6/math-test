@@ -11,21 +11,28 @@ import threading
 # 1. ระบบนับจำนวนผู้เข้าชม
 # ==========================================
 if 'visitor_count' not in st.session_state:
-    st.session_state.visitor_count = 0
-    # เมื่อมีคนเข้าหน้าเว็บครั้งแรก
-    st.session_state.visitor_count += 1
+    st.session_state.visitor_count = 1
     now = datetime.datetime.now(ZoneInfo("Asia/Bangkok")).strftime('%H:%M:%S')
     print(f"[{now}] 👤 มีผู้เข้าชมใหม่! จำนวนผู้เข้าชมรวม: {st.session_state.visitor_count}")
+else:
+    # เพิ่มตัวเลขทุกครั้งที่มีการรันหน้าเว็บใหม่ (หรือเปลี่ยนเลขตามต้องการ)
+    pass 
+
+if 'logger_running' not in st.session_state:
+    # ส่งค่า st.session_state.visitor_count เข้าไปในฟังก์ชัน
+    t = threading.Thread(target=log_monitor, args=(st.session_state.visitor_count,), daemon=True)
+    t.start()
+    st.session_state.logger_running = True
 
 # ==========================================
 # 2. ระบบ Log เบื้องหลัง (ไม่รีเฟรชหน้าเว็บ)
 # ==========================================
-def log_monitor():
+def log_monitor(visitor_count): # ส่งค่า count เข้าไปเป็น Parameter แทนการดึงจาก session_state
     while True:
         now = datetime.datetime.now(ZoneInfo("Asia/Bangkok")).strftime('%H:%M:%S')
-        # แสดงสถานะและจำนวนคนใน Log
-        print(f"[{now}] 🟢 สถานะ: ระบบทำงานปกติ | ผู้ใช้งานปัจจุบัน: {st.session_state.visitor_count} คน")
-        time.sleep(10) # แจ้งเตือนทุก 10 วินาทีใน Log
+        # ใช้ค่า visitor_count ที่ส่งเข้ามา
+        print(f"[{now}] 🟢 สถานะ: ระบบทำงานปกติ | ผู้ใช้งานปัจจุบัน: {visitor_count} คน")
+        time.sleep(10)
 
 if 'logger_running' not in st.session_state:
     t = threading.Thread(target=log_monitor, daemon=True)

@@ -195,7 +195,12 @@ components.html(html_code, height=900)
 # ==========================================
 # 5. เวลาปัจจุบัน
 # ==========================================
+# สร้างพื้นที่สำหรับเวลา
+time_placeholder = st.empty()
+
+# ดึงเวลาไทย
 bangkok_now = datetime.datetime.now(ZoneInfo("Asia/Bangkok"))
 time_str = bangkok_now.strftime('%d/%m/%Y %H:%M:%S')
-while True:
-    st.markdown(f"<p style='text-align: center; color: gray;'>เวลาปัจจุบัน: {time_str}</p>", unsafe_allow_html=True)
+
+# แสดงเวลาในพื้นที่ที่กำหนด
+time_placeholder.markdown(f"<p style='text-align: center; color: gray;'>เวลาปัจจุบัน: {time_str}</p>", unsafe_allow_html=True)

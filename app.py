@@ -169,54 +169,21 @@ html_code = f"""
     function parse(s) {{ s = s.toLowerCase().replace(/\\s/g, ''); if(!s) return {{c:0, p:0}}; if(!s.includes('x')) return {{c:parseFloat(s)||0, p:0}}; let parts = s.split('x'); let c = parts[0]==='' ? 1 : (parts[0]==='-' ? -1 : parseFloat(parts[0])); let p = 1; if(parts[1] && parts[1].startsWith('^')) p = parseInt(parts[1].slice(1)) || 0; return {{c, p}}; }}
     function fmt(c, p) {{ if(c===0) return ""; if(p===0) return c; let res = (c===1) ? "x" : (c===-1 ? "-x" : c+"x"); if(p!==1) res += "<sup>"+p+"</sup>"; return res; }}
     function update() {{
-        let tops = [], lefts = [], allFilled = true;
-        let topValues = []; // เก็บค่าดิบ T1-T5
-        let leftValues = []; // เก็บค่าดิบ L1-L5
-
-        for(let i = 0; i < size; i++) {{
-            let val = document.getElementById('top'+i).value;
-            if(!val) allFilled = false;
-            topValues.push(val);
-            tops.push(parse(val));
-        }}
-        for(let j = 0; j < size; j++) {{
-            let val = document.getElementById('left'+j).value;
-            if(!val) allFilled = false;
-            leftValues.push(val);
-            lefts.push(parse(val));
-        }}
-
-        if (!allFilled) {{
-            document.getElementById('finalResultBox').style.display = 'none';
-            return;
-        }}
-
-        let finalMap = {{}};
-        for(let j = 0; j < size; j++) {{
-            for(let i = 0; i < size; i++) {{
-                let c = tops[i].c * lefts[j].c;
-                let p = tops[i].p + lefts[j].p;
-                document.getElementById(`res_${j}_${i}`).innerHTML = fmt(c, p);
+        let tops=[], lefts=[], allFilled=true;
+        for(let i=0; i<size; i++) {{ let v = document.getElementById('top'+i).value; if(!v) allFilled=false; tops.push(parse(v)); }}
+        for(let j=0; j<size; j++) {{ let v = document.getElementById('left'+j).value; if(!v) allFilled=false; lefts.push(parse(v)); }}
+        if(!allFilled) {{ document.getElementById('finalResultBox').style.display='none'; return; }}
+        let finalMap={{}};
+        for(let j=0; j<size; j++) {{
+            for(let i=0; i<size; i++) {{
+                let c = tops[i].c * lefts[j].c; let p = tops[i].p + lefts[j].p;
+                document.getElementById(`res_${{j}}_${{i}}`).innerHTML = fmt(c, p);
                 finalMap[p] = (finalMap[p]||0) + c;
             }}
         }}
-
-        let terms = Object.keys(finalMap).map(Number).sort((a,b)=>b-a).filter(p=>finalMap[p]!==0).map((p,i)=>{{
-            let c = finalMap[p], s = fmt(c, p);
-            return (i > 0 && c > 0) ? " + " + s : s;
-        }});
-
-        const resultText = terms.join('') || "0";
+        let terms = Object.keys(finalMap).map(Number).sort((a,b)=>b-a).filter(p=>finalMap[p]!==0).map((p,i)=>{{ let c=finalMap[p], s=fmt(c, p); if(i>0 && c>0) return " + "+s; if(c<0) return " "+s; return s; }});
         const box = document.getElementById('finalResultBox');
-        box.innerHTML = resultText;
-        box.style.display = 'block';
-
-        // --- ส่วนที่เพิ่มเข้ามา: บันทึกข้อมูลลง Log ---
-        console.log("--- บันทึกการคำนวณ ---");
-        console.log("Input แถวบน (T):", topValues.join(", "));
-        console.log("Input แถวซ้าย (L):", leftValues.join(", "));
-        console.log("ผลลัพธ์สุดท้าย:", resultText.replace(/<[^>]*>/g, '')); // เอา tag <sup> ออกเพื่อให้อ่านง่ายใน log
-        console.log("-----------------------");
+        box.innerHTML = terms.join('') || "0"; box.style.display='block';
     }}
     document.querySelectorAll('input').forEach(el => el.addEventListener('input', update));
 </script>
@@ -230,4 +197,5 @@ components.html(html_code, height=900)
 # ==========================================
 bangkok_now = datetime.datetime.now(ZoneInfo("Asia/Bangkok"))
 time_str = bangkok_now.strftime('%d/%m/%Y %H:%M:%S')
-st.markdown(f"<p style='text-align: center; color: gray;'>เวลาปัจจุบัน: {time_str}</p>", unsafe_allow_html=True)
+while True:
+    st.markdown(f"<p style='text-align: center; color: gray;'>เวลาปัจจุบัน: {time_str}</p>", unsafe_allow_html=True)

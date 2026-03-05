@@ -5,22 +5,45 @@ from zoneinfo import ZoneInfo
 import time
 import threading
 
-def log_heartbeat():
-    while True:
-        # ดึงเวลาปัจจุบันมาแสดงใน Log
-        now = datetime.datetime.now(ZoneInfo("Asia/Bangkok")).strftime('%H:%M:%S')
-        # พิมพ์ข้อความลงใน Log (คุณสามารถเปลี่ยนข้อความในวงเล็บได้ตามต้องการ)
-        print(f"[{now}] 🟢 ระบบทำงานปกติ: ผู้ใช้กำลังใช้งาน Maths Studio")
-        time.sleep(10) # รอ 5 วินาทีแล้ววนลูปใหม่
+# ==============================================================================================================================
 
-# ตรวจสอบว่าเคยสั่งรันการทำงานเบื้องหลังไปหรือยัง (เพื่อไม่ให้มันรันซ้ำซ้อนกัน)
+# ==========================================
+# 1. ระบบนับจำนวนผู้เข้าชม
+# ==========================================
+if 'visitor_count' not in st.session_state:
+    st.session_state.visitor_count = 0
+    # เมื่อมีคนเข้าหน้าเว็บครั้งแรก
+    st.session_state.visitor_count += 1
+    now = datetime.datetime.now(ZoneInfo("Asia/Bangkok")).strftime('%H:%M:%S')
+    print(f"[{now}] 👤 มีผู้เข้าชมใหม่! จำนวนผู้เข้าชมรวม: {st.session_state.visitor_count}")
+
+# ==========================================
+# 2. ระบบ Log เบื้องหลัง (ไม่รีเฟรชหน้าเว็บ)
+# ==========================================
+def log_monitor():
+    while True:
+        now = datetime.datetime.now(ZoneInfo("Asia/Bangkok")).strftime('%H:%M:%S')
+        # แสดงสถานะและจำนวนคนใน Log
+        print(f"[{now}] 🟢 สถานะ: ระบบทำงานปกติ | ผู้ใช้งานปัจจุบัน: {st.session_state.visitor_count} คน")
+        time.sleep(10) # แจ้งเตือนทุก 10 วินาทีใน Log
+
 if 'logger_running' not in st.session_state:
-    # สั่งให้ฟังก์ชัน log_heartbeat ทำงานอยู่เบื้องหลัง
-    t = threading.Thread(target=log_heartbeat, daemon=True)
+    t = threading.Thread(target=log_monitor, daemon=True)
     t.start()
     st.session_state.logger_running = True
 
-st.set_page_config(page_title="Maths Studio", page_icon="🔢", layout="wide")
+# ==========================================
+# 3. ตรวจจับการออกจากหน้าเว็บ
+# ==========================================
+# หมายเหตุ: Streamlit เป็นแบบ Server-side การตรวจจับการ "ปิดหน้าเว็บ" ทันทีทำได้ยาก
+# แต่เราสามารถแสดงใน Log ได้เมื่อมีการ Refresh หรือเปลี่ยนหน้า
+now_exit = datetime.datetime.now(ZoneInfo("Asia/Bangkok")).strftime('%H:%M:%S')
+# ข้อความนี้จะถูกพิมพ์เมื่อมีการโหลดหน้าเว็บใหม่
+print(f"[{now_exit}] ℹ️ กำลังโหลดหน้าแอป Maths Studio... ยินดีต้อนรับครับ")
+
+
+# ==============================================================================================================================
+
 # ==========================================
 # 1. การตั้งค่าหน้าจอ
 # ==========================================
@@ -192,8 +215,10 @@ html_code = f"""
 """
 components.html(html_code, height=900)
 
+# ==============================================================================================================================
+
 # ==========================================
-# 5. เวลาปัจจุบัน
+# 5. เวลา
 # ==========================================
 # สร้างพื้นที่สำหรับเวลา
 time_placeholder = st.empty()

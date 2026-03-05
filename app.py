@@ -2,6 +2,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 import datetime
 from zoneinfo import ZoneInfo
+import threading
 
 # ==========================================
 # 1. การตั้งค่าหน้าจอ (ต้องอยู่บรรทัดแรกเสมอ)
@@ -11,8 +12,7 @@ st.set_page_config(page_title="Maths Studio", page_icon="🔢", layout="wide")
 # บังคับพื้นหลังให้เป็นแบบสว่าง และตั้งค่า Header (CSS)
 st.markdown("""
 <style>
-    .stApp, .stApp > header { background-color: #f8f9fa !important; }
-    [data-testid="stSidebar"] { background-color: #ffffff !important; border-right: 1px solid #e0e0e0; }
+    .stApp, .stApp > header { background-color: #f8f9fa !important; }[data-testid="stSidebar"] { background-color: #ffffff !important; border-right: 1px solid #e0e0e0; }
     [data-testid="stSidebar"] * { color: #000000 !important; }
     
     .school-title { 
@@ -31,14 +31,51 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ==========================================
-# 2. ระบบ Log และเวลา
+# 2. ระบบ Log ตรวจจับคนเข้า-ออกเว็บ (Global State)
 # ==========================================
-if 'visitor_count' not in st.session_state:
-    st.session_state.visitor_count = 1
-    now = datetime.datetime.now(ZoneInfo("Asia/Bangkok")).strftime('%H:%M:%S')
-    # แสดง Log ใน Console ของ Server เมื่อมีคนเข้าเว็บใหม่
-    print(f"[{now}] 👤 มีผู้เข้าชมใหม่! จำนวนผู้เข้าชมรวม: {st.session_state.visitor_count}")
-    print(f"[{now}] ℹ️ กำลังโหลดหน้าแอป Maths Studio... ยินดีต้อนรับครับ")
+# สร้างคลาสเก็บจำนวนคนออนไลน์ (แชร์กันทุกคน)
+class ActiveUserTracker:
+    def __init__(self):
+        self.active_users = 0
+        self.lock = threading.Lock() # ป้องกันการนับผิดพลาดเวลาคนเข้าพร้อมกัน
+
+    def add_user(self):
+        with self.lock:
+            self.active_users += 1
+            return self.active_users
+
+    def remove_user(self):
+        with self.lock:
+            self.active_users -= 1
+            return self.active_users
+
+# ให้ Streamlit จดจำตัว Tracker นี้ไว้ใน Server ตลอดเวลา
+@st.cache_resource
+def get_tracker():
+    return ActiveUserTracker()
+
+# สร้างคลาสที่จะผูกติดกับ Session ของผู้ใช้แต่ละคน
+class UserSession:
+    def __init__(self, tracker):
+        self.tracker = tracker
+        current_users = self.tracker.add_user()
+        now = datetime.datetime.now(ZoneInfo("Asia/Bangkok")).strftime('%H:%M:%S')
+        print(f"[{now}] 🟢 มีผู้เข้าชมใหม่! | ตอนนี้มีคนกำลังใช้งานอยู่ทั้งหมด: {current_users} คน")
+
+    # ฟังก์ชันนี้จะทำงานอัตโนมัติเมื่อผู้ใช้ปิดหน้าเว็บหรือปิดแท็บ
+    def __del__(self):
+        current_users = self.tracker.remove_user()
+        # นำเข้าไลบรารีอีกครั้งภายใน __del__ เพื่อป้องกัน Error ตอนที่ Server ล้างหน่วยความจำ
+        import datetime
+        from zoneinfo import ZoneInfo
+        now = datetime.datetime.now(ZoneInfo("Asia/Bangkok")).strftime('%H:%M:%S')
+        print(f"[{now}] 🔴 มีผู้ใช้ออกจากแอป! | ตอนนี้มีคนกำลังใช้งานอยู่ทั้งหมด: {current_users} คน")
+
+tracker = get_tracker()
+
+# ผูก UserSession เข้ากับผู้ใช้คนนี้ (ถ้าเพิ่งเข้ามาใหม่)
+if 'session_tracker' not in st.session_state:
+    st.session_state.session_tracker = UserSession(tracker)
 
 # ==========================================
 # 3. แถบเครื่องมือด้านข้าง (Sidebar)
@@ -65,12 +102,10 @@ size = int(grid_choice.split("x")[0])
 # ==========================================
 # 4. สร้างองค์ประกอบ HTML (ตารางและเส้น)
 # ==========================================
-# สร้างเส้นให้อยู่ตรงขอบของ Grid พอดี
 vlines = "".join([f'<div class="line vline" style="left: {80 + (i * 100)}px;"></div>' for i in range(size)])
 hlines = "".join([f'<div class="line hline" style="top: {80 + (i * 100)}px;"></div>' for i in range(size)])
 top_inputs = "".join([f'<div class="input-cell"><input id="top{i}" class="gamebox" placeholder="T{i+1}" autocomplete="off"></div>' for i in range(size)])
 
-# ให้ L เรียงจาก size ลงไปหา 1 (L1 อยู่ล่างสุด)
 left_and_results = ""
 for j in range(size - 1, -1, -1):
     left_and_results += f'<div class="input-cell"><input id="left{j}" class="gamebox" placeholder="L{j+1}" autocomplete="off"></div>'
@@ -85,7 +120,6 @@ html_code = f"""
 <html>
 <head>
     <meta charset="UTF-8">
-    <!-- Viewport ช่วยให้สเกลบนมือถือและ iPad ถูกต้อง -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@500;700&family=Sarabun:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -95,7 +129,6 @@ html_code = f"""
             padding: 20px 0;
             background: transparent;
         }}
-        /* ทำให้เลื่อนซ้ายขวาได้ในมือถือ/iPad */
         .scroll-wrapper {{
             width: 100%;
             overflow-x: auto;
@@ -112,7 +145,7 @@ html_code = f"""
             display: inline-flex;
             flex-direction: column;
             align-items: center;
-            min-width: max-content; /* ป้องกันกล่องบีบตัวในมือถือ */
+            min-width: max-content; 
         }}
         .grid-wrapper {{ 
             display: grid; 
@@ -138,7 +171,7 @@ html_code = f"""
             width: 60px; height: 40px; text-align: center; 
             border: 1px solid #ced4da; border-radius: 8px; 
             font-family: 'Sarabun', sans-serif; font-weight: 600; 
-            font-size: 16px; /* 16px ป้องกัน iPhone ซูมหน้าจออัตโนมัติ */
+            font-size: 16px; 
             outline: none; transition: all 0.2s ease; 
         }}
         input.gamebox:focus {{ 
@@ -162,7 +195,7 @@ html_code = f"""
         <div class="app-container">
             <div class="grid-wrapper">
                 <div class="lines-container">{vlines}{hlines}</div>
-                <div></div> <!-- ช่องว่างซ้ายบน -->
+                <div></div>
                 {top_inputs}
                 {left_and_results}
             </div>
@@ -228,7 +261,6 @@ html_code = f"""
 </html>
 """
 
-# แสดง HTML โดยปรับความสูงอัตโนมัติตามขนาด Grid
 height_calc = 400 + (size * 100)
 components.html(html_code, height=height_calc)
 
